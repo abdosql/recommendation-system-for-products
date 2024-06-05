@@ -7,4 +7,6 @@
 /frontend/public/bundles/
 /frontend/var/
 /frontend/vendor/
+/frontend/.idea
+/backend/.idea
 ###< symfony/framework-bundle ###
