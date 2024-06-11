@@ -4,19 +4,24 @@ namespace App\Service;
 
 use App\Entity\Comment;
 use App\Entity\Product;
+use App\Entity\Rating;
 use App\Interface\ICommentService;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CommentService implements ICommentService
 {
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
     public function getCommentById(Comment $comment): ?Comment
     {
-        // TODO: Implement getCommentById() method.
+        return $this->entityManager->getRepository(Comment::class)->find($comment);
     }
 
     public function getAllCommentsOfProduct(Product $product): array
     {
-        // TODO: Implement getAllCommentsOfProduct() method.
+        return $this->entityManager->getRepository(Comment::class)->findAll();
     }
 
     public function createComment(Product $product): ?Comment
@@ -31,6 +36,8 @@ class CommentService implements ICommentService
 
     public function deleteComment(Comment $comment): void
     {
-        // TODO: Implement deleteComment() method.
+        $comment = $this->getCommentById($comment);
+        $this->entityManager->remove($comment);
+        $this->entityManager->flush();
     }
 }

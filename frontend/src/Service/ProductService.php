@@ -4,32 +4,36 @@ namespace App\Service;
 
 use App\Entity\Product;
 use App\Interface\IProductService;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProductService implements IProductService
 {
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
     public function getProductById(Product $product): ?Product
     {
-        // TODO: Implement getProductById() method.
+        return $this->entityManager->getRepository(Product::class)->find($product);
     }
 
     public function getAllProducts(): array
     {
-        // TODO: Implement getAllProducts() method.
+        return $this->entityManager->getRepository(Product::class)->findAll();
     }
 
     public function createProduct(array $data): Product
     {
-        // TODO: Implement createProduct() method.
     }
 
     public function updateProduct(Product $product, array $data): ?Product
     {
-        // TODO: Implement updateProduct() method.
     }
 
     public function deleteProduct(Product $product): void
     {
-        // TODO: Implement deleteProduct() method.
+        $product = $this->getProductById($product);
+        $this->entityManager->remove($product);
+        $this->entityManager->flush();
     }
 }
