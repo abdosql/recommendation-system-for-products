@@ -9,4 +9,6 @@
 /frontend/vendor/
 /frontend/.idea
 /backend/.idea
+
+/.idea
 ###< symfony/framework-bundle ###
