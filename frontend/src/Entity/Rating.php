@@ -2,28 +2,27 @@
 
 namespace App\Entity;
 
-use App\Repository\InteractionRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\RatingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InteractionRepository::class)]
-class Interaction
+#[ORM\Entity(repositoryClass: RatingRepository::class)]
+class Rating
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $type = null;
+    #[ORM\Column]
+    private ?int $rating = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $interactionDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interactions')]
+    #[ORM\ManyToOne(inversedBy: 'ratings')]
     private ?Product $product = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interactions')]
+    #[ORM\ManyToOne(inversedBy: 'ratings')]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -31,26 +30,26 @@ class Interaction
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getRating(): ?int
     {
-        return $this->type;
+        return $this->rating;
     }
 
-    public function setType(string $type): static
+    public function setRating(int $rating): static
     {
-        $this->type = $type;
+        $this->rating = $rating;
 
         return $this;
     }
 
-    public function getInteractionDate(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->interactionDate;
+        return $this->createdAt;
     }
 
-    public function setInteractionDate(\DateTimeImmutable $interactionDate): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->interactionDate = $interactionDate;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -2,28 +2,28 @@
 
 namespace App\Entity;
 
-use App\Repository\InteractionRepository;
+use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InteractionRepository::class)]
-class Interaction
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $type = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $interactionDate = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interactions')]
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Product $product = null;
 
-    #[ORM\ManyToOne(inversedBy: 'interactions')]
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -31,26 +31,26 @@ class Interaction
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getContent(): ?string
     {
-        return $this->type;
+        return $this->content;
     }
 
-    public function setType(string $type): static
+    public function setContent(string $content): static
     {
-        $this->type = $type;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function getInteractionDate(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->interactionDate;
+        return $this->createdAt;
     }
 
-    public function setInteractionDate(\DateTimeImmutable $interactionDate): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->interactionDate = $interactionDate;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
