@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
         }
 
         // Create interactions
-        $interactionTypes = ['view', 'add_to_cart', 'purchase', 'favorite'];
+        $interactionTypes = ['add_to_cart', 'cart.item_added', 'cart.item_removed', 'product.commented', 'product.rated', 'product.viewed'];
         for ($i = 0; $i < 200; $i++) {
             $interaction = new Interaction();
             $interaction->setUser($faker->randomElement($users));
