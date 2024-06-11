@@ -2,28 +2,30 @@
 
 namespace App\Event;
 
+use App\Entity\Product;
+use App\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductViewedEvent extends Event
 {
     public const NAME = 'product.viewed';
 
-    private $userId;
-    private $productId;
+    private User $user;
+    private Product $product;
 
-    public function __construct(int $userId, int $productId)
+    public function __construct(User $user, Product $product)
     {
-        $this->userId = $userId;
-        $this->productId = $productId;
+        $this->user = $user;
+        $this->product = $product;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function getProductId(): int
+    public function getProduct(): Product
     {
-        return $this->productId;
+        return $this->product;
     }
 }

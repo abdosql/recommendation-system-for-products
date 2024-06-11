@@ -2,34 +2,38 @@
 
 namespace App\Event;
 
+use App\Entity\Product;
+use App\Entity\Rating;
+use App\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductRatedEvent extends Event
 {
     public const NAME = 'product.rated';
 
-    private $userId;
-    private $productId;
-    private $rating;
+    private User $user;
+    private Product $product;
+    private Rating $rating;
 
-    public function __construct(int $userId, int $productId, int $rating)
+    public function __construct(User $user, Product $product, Rating $rating)
     {
-        $this->userId = $userId;
-        $this->productId = $productId;
+        $this->user = $user;
+        $this->product = $product;
         $this->rating = $rating;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function getProductId(): int
+    public function getProduct(): Product
     {
-        return $this->productId;
+        return $this->product;
     }
 
-    public function getRating(): int
+
+    public function getRating(): Rating
     {
         return $this->rating;
     }

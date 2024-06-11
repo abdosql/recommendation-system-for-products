@@ -2,34 +2,37 @@
 
 namespace App\Event;
 
+use App\Entity\Comment;
+use App\Entity\Product;
+use App\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductCommentedEvent extends Event
 {
     public const NAME = 'product.commented';
 
-    private $userId;
-    private $productId;
-    private $comment;
+    private User $user;
+    private Product $product;
+    private Comment $comment;
 
-    public function __construct(int $userId, int $productId, string $comment)
+    public function __construct(User $user, Product $product, Comment $comment)
     {
-        $this->userId = $userId;
-        $this->productId = $productId;
+        $this->user = $user;
+        $this->product = $product;
         $this->comment = $comment;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function getProductId(): int
+    public function getProduct(): Product
     {
-        return $this->productId;
+        return $this->product;
     }
 
-    public function getComment(): string
+    public function getComment(): Comment
     {
         return $this->comment;
     }
