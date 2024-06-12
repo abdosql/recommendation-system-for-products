@@ -40,4 +40,12 @@ class ProductRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findAllRecomendations(array $recommendationsForUser): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->andWhere($qb->expr()->in('p.id', ':productIds'))
+            ->setParameter('productIds', $recommendationsForUser);
+
+        return $qb->getQuery()->getResult();
+    }
 }

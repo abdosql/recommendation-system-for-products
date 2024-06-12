@@ -255,93 +255,35 @@
                             <div class="card-body p-0">
                                 <div class="swiper-container slider rounded overflow-hidden">
                                     <div class="swiper-wrapper" dir="ltr">
-                                        <div class="swiper-slide rounded overflow-hidden ecommerce-slied-bg">
-                                            <div class="row justify-content-center">
-                                                <div class="col-xl-11 col-lg-11">
-                                                    <div class="row align-items-center">
-                                                    <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <img src="{{ asset('images/product/img-8.png') }}" class="img-fluid" alt="">
-                                                        </div>
-                                                        </div>
+                                        {% for pr in recommendations %}
+                                            <div class="swiper-slide rounded overflow-hidden ecommerce-slied-bg">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-xl-11 col-lg-11">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="p-4 p-xl-0">
+                                                                    <img style="width: 70%" src="{{ asset('images/product/product.jpg') }}" class="img-fluid" alt="">
+                                                                </div>
+                                                            </div>
 
-                                                        <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <h3 class="mb-2 text-truncate"><a href="ecommerce-product-detail.html">Tuition Classes Chair Crime </a></h3>
-                                                            <h5 class="fw-normal font-size-16 mt-1 text-truncate">SKU: Fluid HB - Lite - AN White</h5>
-                                                            <ul class="list-unstyled px-0 mb-0 mt-4">
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> 3 Year Warranty and Stock Available</p></li>
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> Material : Steel + PVC Leather + Sponge</p></li>
-                                                                </ul>
-                                                            <h2 class="mb-0 mt-4 text-truncate"><span class="font-size-20">Form</span><b> $2,360</b> <span class="text-muted me-2"><del class="font-size-20 fw-normal">$3500</del></span></h2>
-                                                            <div class="mt-4">
-                                                                <button type="button" class="btn btn-success w-lg waves-effect waves-light">Buy Now</button>
+                                                            <div class="col-md-6">
+                                                                <div class="p-4 p-xl-0">
+                                                                    <h3 class="mb-2 text-truncate"><a href="ecommerce-product-detail.html">{{ pr.getName() }}</a></h3>
+                                                                    <ul class="list-unstyled px-0 mb-0 mt-4">
+                                                                        <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> {{ pr.getDescription() }}</p></li>
+                                                                    </ul>
+                                                                    <h2 class="mb-0 mt-4 text-truncate"><span class="font-size-20">Form</span><b> {{ pr.getPrice() }} MAD</b> <span class="text-muted me-2"><del class="font-size-20 fw-normal">$3500</del></span></h2>
+                                                                    <div class="mt-4">
+                                                                        <button type="button" class="btn btn-success w-lg waves-effect waves-light">Buy Now</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="swiper-slide rounded overflow-hidden ecommerce-slied-bg">
-                                            <div class="row justify-content-center">
-                                                <div class="col-xl-11 col-lg-11">
-                                                    <div class="row align-items-center">
-                                                    <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <img src="{{ asset('images/product/img-4.png') }}" class="img-fluid" alt="">
-                                                        </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <h3 class="mb-2 text-truncate"><a href="ecommerce-product-detail.html">Home & Office Chair Crime </a></h3>
-                                                            <h5 class="fw-normal font-size-16 mt-1 text-truncate">SKU: Fluid HB - Lite - AN Grey</h5>
-
-                                                            <ul class="list-unstyled px-0 mb-0 mt-4">
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> Material : Steel + PVC Leather + Sponge</p></li>
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> Overall Dimention : 16.5" x 19.5" x 24.3" (L x W x H)</p></li>
-                                                            </ul>
-                                                            
-                                                            <h2 class="mb-0 mt-4 text-truncate"><span class="font-size-20">Form</span><b> $2,360</b> <span class="text-muted me-2"><del class="font-size-20 fw-normal">$3500</del></span></h2>
-                                                            <div class="mt-4">
-                                                                <button type="button" class="btn btn-success w-lg waves-effect waves-light">Buy Now</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="swiper-slide rounded overflow-hidden ecommerce-slied-bg">
-                                            <div class="row justify-content-center">
-                                                <div class="col-xl-11 col-lg-11">
-                                                    <div class="row align-items-center">
-                                                    <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <img src="{{ asset('images/product/img-6.png') }}" class="img-fluid" alt="">
-                                                        </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                        <div class="p-4 p-xl-0">
-                                                            <h3 class="mb-2 text-truncate"><a href="ecommerce-product-detail.html">Hotel Dining Table And Chair</a></h3>
-                                                            <h5 class="fw-normal font-size-16 mt-1 text-truncate">SKU: Fluid HB - Lite - AN Dark</h5>
-                                                            <ul class="list-unstyled px-0 mb-0 mt-4">
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> Choose From Standard , Express Or Assembled Services</p></li>
-                                                                <li><p class="text-muted mb-1 text-truncate"><i class="mdi mdi-circle-medium align-middle me-1"></i> 3 Year Warranty and Stock Available</p></li>
-                                                            </ul>
-                                                            <h2 class="mb-0 mt-4 text-truncate"><span class="font-size-20">Form</span><b> $2,360</b> <span class="text-muted me-2"><del class="font-size-20 fw-normal">$3500</del></span></h2>
-                                                            <div class="mt-4">
-                                                                <button type="button" class="btn btn-success w-lg waves-effect waves-light">Buy Now</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
 
                                     <div class="d-none d-lg-block">
