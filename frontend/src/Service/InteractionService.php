@@ -8,6 +8,11 @@ use App\Entity\User;
 use App\Interface\IInteractionService;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class InteractionService implements IInteractionService
@@ -27,34 +32,20 @@ class InteractionService implements IInteractionService
     {
         // TODO: Implement logInteraction() method.
     }
-    public function sendInteractionsToFlask()
-    {
-        $interactions = $this->getInteractions();
+g
 
-        $formattedInteractions = array_map(function (Interaction $interaction) {
-            $data = [
-                'user_id' => $interaction->getUser()->getId(),
-                'item_id' => $interaction->getProduct()->getId(),
-                'type' => $interaction->getType(),
-            ];
-            if ($interaction->getType() === 'rating') {
-                $data['rating'] = $interaction->getRating();
-            }
-            return $data;
-        }, $interactions);
-
-        // Send interactions to Flask API
-        $response = $this->client->post($this->flaskApiUrl . '/train', [
-            'json' => ['interactions' => $formattedInteractions]
-        ]);
-
-        return $response->getStatusCode() === 200;
-    }
-
-    public function getRecommendationsForUser(int $userId, int $numRecommendations = 5)
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws \Exception
+     */
+    public function getRecommendationsForUser(int $userId, int $numRecommendations = 5): array
     {
         // Send request to Flask API for recommendations
-        $response = $this->client-pos($this->flaskApiUrl . '/recommend', [
+        $response = $this->client->request('POST', $this->flaskApiUrl . '/recommend', [
             'json' => [
                 'user_id' => $userId,
                 'num_recommendations' => $numRecommendations
@@ -62,7 +53,7 @@ class InteractionService implements IInteractionService
         ]);
 
         if ($response->getStatusCode() === 200) {
-            return json_decode($response->getBody()->getContents(), true)['recommended_items'];
+            return $response->toArray()['recommended_items'];
         }
 
         throw new \Exception('Failed to get recommendations from Flask API');
