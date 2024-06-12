@@ -27,3 +27,7 @@ services:
     App\EventSubscriber\UserInteractionSubscriber:
         tags:
             - { name: 'kernel.event_subscriber' }
+
+    App\Service\Recommender\RecommenderService:
+        arguments:
+            $client: '@http_client'
