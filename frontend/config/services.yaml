@@ -27,3 +27,6 @@ services:
     App\EventSubscriber\UserInteractionSubscriber:
         tags:
             - { name: 'kernel.event_subscriber' }
+    App\Service\InteractionService:
+        arguments:
+            $flaskApiUrl: '%env(FLASK_API_URL)%'

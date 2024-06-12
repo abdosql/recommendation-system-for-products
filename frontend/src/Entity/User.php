@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $comments;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?cart $cart = null;
+    private ?Cart $cart = null;
 
     public function __construct()
     {
@@ -227,12 +227,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCart(): ?cart
+    public function getCart(): ?Cart
     {
         return $this->cart;
     }
 
-    public function setCart(?cart $cart): static
+    public function setCart(?Cart $cart): static
     {
         $this->cart = $cart;
 

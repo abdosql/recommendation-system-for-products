@@ -27,12 +27,14 @@
                                     <p class="text-muted">Sign in to continue to Recommendio.</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="https://themesdesign.in/webadmin/layouts/index.html">
-        
+                                    <form method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
                                         <div class="mb-3">
                                             <label class="form-label" for="username">Username</label>
                                             <div class="position-relative input-custom-icon">
-                                                <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
                                                  <span class="bx bx-user"></span>
                                             </div>
                                         </div>
@@ -41,10 +43,10 @@
                                             <div class="float-end">
                                                 <a href="auth-recoverpw.html" class="text-muted text-decoration-underline">Forgot password?</a>
                                             </div>
-                                            <label class="form-label" for="password-input">Password</label>
+                                            <label class="form-label" for="password">Password</label>
                                             <div class="position-relative auth-pass-inputgroup input-custom-icon">
                                                 <span class="bx bx-lock-alt"></span>
-                                                <input type="password" class="form-control" id="password-input" placeholder="Enter password">
+                                                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
                                                 <button type="button" class="btn btn-link position-absolute h-100 end-0 top-0" id="password-addon">
                                                     <i class="mdi mdi-eye-outline font-size-18 text-muted"></i>
                                                 </button>
@@ -65,9 +67,11 @@
                                                 <h5 class="font-size-14 mb-2 mt-2 title"></h5>
                                             </div>
                                         </div>
-
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}"
+                                        >
                                         <div class="mt-4 text-center">
-                                            <p class="mb-0">Don't have an account ? <a href="{{ path("app_register") }}" class="fw-medium text-primary"> Signup now </a> </p>
+                                            <p class="mb-0">Don't have an account ? <a href="" class="fw-medium text-primary"> Signup now </a> </p>
                                         </div>
                                     </form>
                                 </div>
