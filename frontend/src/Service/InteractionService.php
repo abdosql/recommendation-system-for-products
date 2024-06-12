@@ -32,7 +32,28 @@ class InteractionService implements IInteractionService
     {
         // TODO: Implement logInteraction() method.
     }
-g
+    public function sendInteractionsToFlask(): bool
+    {
+        $interactions = $this->em->getRepository(Interaction::class)->findAll();
+
+        $formattedInteractions = array_map(function (Interaction $interaction) {
+            $data = [
+                'user_id' => $interaction->getUser()->getId(),
+                'item_id' => $interaction->getProduct()->getId(),
+                'type' => $interaction->getType(),
+            ];
+            if ($interaction->getType() === 'rating') {
+                $data['rating'] = $interaction->getRating();
+            }
+            return $data;
+        }, $interactions);
+
+        $response = $this->client->request('POST', $this->flaskApiUrl . '/train', [
+            'json' => ['interactions' => $formattedInteractions]
+        ]);
+
+        return $response->getStatusCode() === 200;
+    }
 
     /**
      * @throws TransportExceptionInterface

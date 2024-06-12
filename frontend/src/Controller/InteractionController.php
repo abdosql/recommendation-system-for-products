@@ -23,15 +23,15 @@ class InteractionController extends AbstractController
 
         return new Response($success ? 'Interactions sent successfully!' : 'Failed to send interactions.', $success ? 200 : 500);
     }
-//    #[Route('//recommendations/{userId}', name: 'get_recommendations', methods: ['GET'])]
-//
-//    public function getRecommendations(int $userId): Response
-//    {
-//        try {
-//            $recommendations = $this->interactionService->getRecommendationsForUser($userId);
-//            return $this->json(['recommended_items' => $recommendations]);
-//        } catch (\Exception $e) {
-//            return $this->json(['error' => $e->getMessage()], 500);
-//        }
-//    }
+    #[Route('/recommendations/{userId}', name: 'get_recommendations', methods: ['GET'])]
+
+    public function getRecommendations(int $userId): Response
+    {
+        try {
+            $recommendations = $this->interactionService->getRecommendationsForUser($userId);
+            return $this->json(['recommended_items' => $recommendations]);
+        } catch (\Exception $e) {
+            return $this->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
